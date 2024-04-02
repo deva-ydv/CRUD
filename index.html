@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +21,7 @@
   </head>
 
   <body>
-    <header class="sidebar active" data-sidebar>
+    <header class="sidebar" data-sidebar>
       <div class="wrapper wrapper-1">
         <a href="">
           <img
@@ -62,7 +62,7 @@
         </button>
       </div>
       <nav class="nav custom-scrollbar" data-side-list>
-        <div class="nav-item">
+        <div class="nav-item active">
           <span class="text text-label-large" data-notebook-field
             >My Notebook</span
           >
@@ -92,5 +92,73 @@
       </nav>
     </header>
     <div class="overlay" data-sidebar-overlay data-sidebar-toggler=""></div>
+    <!-- header ends -->
+
+    <main class="main">
+      <div class="header">
+        <div class="wrapper">
+          <p class="title text-title-large" data-greeting>Good Morning</p>
+          <span class="text text-body-medium" data-current-data
+            >Sat,Sep 22 2023</span
+          >
+        </div>
+        <button
+          class="theme-btn icon-btn large"
+          aria-label="Toggle theme"
+          data-tooltip="Toggle theme"
+          data-theme-btn
+        >
+          <span class="material-symbols-rounded dark-icon" aria-hidden="true"
+            >dark_mode</span
+          >
+          <span class="material-symbols-rounded light-icon" aria-hidden="true"
+            >light_mode</span
+          >
+          <div class="state-layer"></div>
+        </button>
+        <button
+          class="menu-btn icon-btn large"
+          aria-label="Open menu"
+          data-sidebar-toggler
+        >
+          <span class="material-symbols-rounded" aria-hidden="true">menu</span>
+          <div class="state-layer"></div>
+        </button>
+      </div>
+      <h2 class="title text-title-medium" data-note-panel-title>My Notebook</h2>
+
+      <!-- note list  -->
+
+      <div class="note-list" data-note-panel>
+        <div class="card">
+          <div class="card-title text-title-medium">Note title</div>
+          <p class="card-text text-body-large">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            commodi ullam voluptate aperiam officia debitis deleniti totam velit
+            eius amet!
+          </p>
+          <div class="wrapper">
+            <span class="card-time text-label-larg">20 min ago</span>
+            <button
+              class="icon-btn large"
+              aria-label="Delete note"
+              data-tooltip="Delete note"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true"
+                >delete</span
+              >
+              <div class="state-layer"></div>
+            </button>
+          </div>
+          <div class="state-layer"></div>
+        </div>
+      </div>
+      <!-- Fab button for mobile -->
+      <button class="fab" aria-label="New note" data-note-create-btn>
+        <span class="material-symbols-rounded" aria-hidden="true">add</span>
+        <!-- <span class="text text-label-large">New note</span> -->
+        <div class="state-layer"></div>
+      </button>
+    </main>
   </body>
 </html>
