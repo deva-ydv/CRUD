@@ -458,10 +458,20 @@ body {
 }
 
 
-.modal-overlay{
+.modal-overlay {
   z-index: 6;
   visibility: hidden;
   animation: fade-overlay var(--tr-duration-short) var(--tr-easing-linear) forwards;
+}
+
+@keyframes fade-overlay {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
 }
 
 /* #COMPONENTS */
@@ -694,7 +704,31 @@ body {
  * Tooltip
  */
 
+.tooltip {
+  position: fixed;
+  z-index: 4;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--spacing-2);
+  background-color: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  white-space: nowrap;
+  border-radius: var(--radius-extra-small);
+  pointer-events: none;
+  animation: fade var(--tr-duration-short) var(--tr-easing-linear) forwards;
+}
 
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}
 
 
 
@@ -873,7 +907,97 @@ body {
 }
 
 
+.empty-notes {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  color: var(--on-surface-variant);
+  --webkit-user-select: none;
+  user-select: none;
+}
+
+
+.empty-notes .material-symbols-rounded {
+  font-size: 6.8rem;
+  opacity: 0.25;
+  margin-block-end: var(--spacing-4);
+  margin-inline: auto;
+}
 
 /*-----------------------------------*\
   #MEDIA QUERIES
 \*-----------------------------------*/
+
+
+/* responsive larger than 768px */
+
+@media(min-width:768px) {
+  .main {
+    padding-inline: var(--spacing-6);
+  }
+}
+
+/* responsive larger than 992px  */
+
+@media (min-width: 992px) {
+
+  /* base  */
+  body {
+    padding-inline-start: var(--sidebar-width);
+  }
+
+  /* Reused style */
+  .overlay:not(.modal-overlay) {
+    display: none;
+  }
+
+  /* sidebar */
+  .sidebar {
+    visibility: visible;
+    left: 0;
+    height: 100vh;
+    grid-template-rows: repeat(3, max-content) 1fr max-content;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .sidebar.active {
+    transform: unset;
+  }
+
+  .sidebar .fab {
+    display: flex;
+  }
+
+  /* main 
+   */
+
+  .main {
+    padding-inline: var(--spacing-10);
+  }
+
+  .menu-btn,
+  .main .fab {
+    display: none;
+  }
+}
+
+/* responsive larger than 1400px */
+
+
+@media (min-width: 1400px) {
+  /* main */
+
+  .main {
+    max-width: 1480px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+}
