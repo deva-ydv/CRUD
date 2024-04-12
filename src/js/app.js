@@ -7,6 +7,7 @@ import {
 } from "./utils.js";
 import { Tooltip } from "./components/Tooltip.js";
 import { db } from "./db.js";
+import { client } from "./client.js";
 
 // Toggle sidebar in small screen
 
@@ -23,7 +24,7 @@ addEventOnElements(sidebarTogglers, "click", function () {
 const tooltipElems = document.querySelectorAll("[data-tooltip]");
 tooltipElems.forEach((elem) => Tooltip(elem));
 
-// Show greetin msg on homepage
+// Show greeting msg on homepage
 const greetElem = document.querySelector("[data-greeting]");
 const currentHour = new Date().getHours();
 greetElem.textContent = getGreetingMsg(currentHour);
@@ -49,13 +50,26 @@ const showNotebookField = function () {
   // active new created and deactive the last one
   activeNotebook.call(navItem);
   makeElemEditable(navItemField);
-  navItemField.addEventListener('keydown',createNotebook)
+  navItemField.addEventListener("keydown", createNotebook);
 };
 addNotebookBtn.addEventListener("click", showNotebookField);
 
-const createNotebook = function (e){
-  if(e.key==='Enter'){
+const createNotebook = function (e) {
+  if (e.key === "Enter") {
     // stored new created notebook in database
-    db.post.notebook(this.textContent || 'Untitled')
+    const notebookData = db.post.notebook(this.textContent || "Untitled");
+    this.parentElement.remove();
+    // Render navItem
+    client.notebook.create(notebookData);
   }
-}
+};
+
+// Renders the existing notebook list by retrieving data from the database
+// and passing it to the client
+
+const renderExistedNotebook = function () {
+  const notebookList = db.get.notebook();
+  client.notebook.read(notebookList);
+};
+
+renderExistedNotebook();

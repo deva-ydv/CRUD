@@ -1,5 +1,5 @@
 "use strict";
-import { generateID } from "./utils.js";
+import { generateID, findNotebook } from "./utils.js";
 
 let notekeeperDB = {};
 
@@ -25,9 +25,9 @@ const readDB = function () {
 
 // writes the current state of the global variable `notekeeperDB` to local storage
 
-const writeDB = function (){
-localStorage.setItem('notekeeperDB', JSON.stringify(notekeeperDB))
-}
+const writeDB = function () {
+  localStorage.setItem("notekeeperDB", JSON.stringify(notekeeperDB));
+};
 
 // collections of functions for performing CRUD operations on database
 // the database state is managed using global variables and local storage
@@ -44,11 +44,28 @@ export const db = {
       const notebookData = {
         id: generateID(),
         name,
-        notes: []
-      }
-      notebookData.notebooks.push(notebookData)
+        notes: [],
+      };
+      notekeeperDB.notebooks.push(notebookData);
       writeDB();
       return notebookData;
+    },
+  },
+  get: {
+    // Retrives all notebooks from the database
+    notebook() {
+      readDB();
+      return notekeeperDB.notebooks;
+    },
+  },
+  update: {
+    // updates the name of a notebook in the database
+    notebook(notebookId, name) {
+      readDB();
+      const notebook = findNotebook(notekeeperDB, notebookId);
+      notebook.name = name;
+      writeDB();
+      return notebook;
     },
   },
 };

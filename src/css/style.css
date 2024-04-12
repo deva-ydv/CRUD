@@ -963,7 +963,7 @@ body {
     left: 0;
     height: 100vh;
     grid-template-rows: repeat(3, max-content) 1fr max-content;
-    box-shadow: none;
+    /* box-shadow: none; */
     border-radius: 0;
   }
 

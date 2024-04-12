@@ -36,3 +36,10 @@ export const makeElemEditable = function (element) {
  export const generateID = function () {
   return new Date().getDate().toString();
 };
+
+// finds a  notebook in database by its ID
+// db, the database containing notebooks
+// notebookId,  the ID of the notebook to find. 
+export const findNotebook = function(db,notebookId){
+return db.notebooks.find(notebook=>notebook.id === notebookId)
+}
